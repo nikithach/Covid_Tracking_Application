@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>CoronaVirus Tracker Application</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+</head>
+
+<body>
+<div class="container">
+<h1>CoronaVirus Tracker Application</h1>
+<p>This application list the current number of cases reported across the Globe</p>
+
+<div class="jumbotron">
+    <h1 class="display-4"  th:text="${totalReportedCases}"></h1>
+    <p class="lead">Total Cases Reported As Of Today</p>
+    <hr class="my-4">
+    <p>
+        <span>New Cases Reported Since Previous Day</span>
+        <span th:text="${totalNewCases}"></span>
+    </p>
+</div>
+
+    <button type="button" id="changeDataBtn" onclick="changeView();" class="btn btn-primary">Show Graph</button>
+<table id="data-table" class="table">
+    <tr>
+        <th>State</th>
+        <th>Country</th>
+        <th>Total Cases Reported</th>
+        <th>Changes since lasy day</th>
+    </tr>
+    <tr th:each="locationStat : ${locationStats}">
+        <td th:text="${locationStat.state}"></td>
+        <td th:text="${locationStat.country}"></td>
+        <td th:text="${locationStat.latestTotalCases}">0</td>
+        <td th:text="${locationStat.diffFromPreDay}">0</td>
+    </tr>
+</table>
+
+    <div id="graph-data" style="display: none">
+        <h2>Spring Boot Google Charts Example</h2>
+<!--        <div id="chart_div"></div>-->
+        <div id="piechart" style="width: 900px; height: 500px;"></div>
+    </div>
+</div>
+
+</body>
+
+<script>
+    function changeView(){
+        // let changeDataBtn = document.getElementById('changeDataBtn');
+        //
+        // let tableID = document.getElementById('data-table');
+        // let graphID = document.getElementById('graph-data');
+        //
+        // tableID.style.display = tableID.style.display == "none" ? "block" : "none";
+        // graphID.style.display = tableID.style.display == "none" ? "block" : "none";
+        //
+        // changeDataBtn.innerText = tableID.style.display == "block" ? "Show Graph" : "Show Table";
+        window.location.href += "graph";
+
+    }
+
+
+</script>
+
+</html>
